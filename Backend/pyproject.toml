@@ -1,0 +1,35 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Backend de Platziflix"
+authors = [
+    { name="Tu Nombre", email="tu@email.com" }
+]
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "pydantic-settings>=2.0.0",
+    "python-dotenv>=1.0.0"
+]
+requires-python = ">=3.11"
+
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = "Backend básico para la plataforma de cursos Platziflix"
+authors = ["Tu Nombre <tu.email@ejemplo.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+fastapi = ">=0.104.0"
+uvicorn = {extras = ["standard"], version = ">=0.24.0"}
+sqlalchemy = ">=2.0.0"
+psycopg2-binary = ">=2.9.0"
+pydantic-settings = ">=2.0.0"
+python-dotenv = ">=1.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
