@@ -8,8 +8,10 @@ import ErrorMessage from "./components/ErrorMessage";
 import CourseCard from "./components/CourseCard";
 import CourseSkeleton from "./components/CourseSkeleton";
 
+import { apiConfig } from "../../lib/api";
+
 async function getCourses(): Promise<CourseListItem[]> {
-  const res = await fetch("http://localhost:8000/courses/", { cache: "no-store" });
+  const res = await fetch(apiConfig.endpoints.courses, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch courses");
   return res.json();
 }

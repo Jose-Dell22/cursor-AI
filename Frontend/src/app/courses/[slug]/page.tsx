@@ -6,9 +6,11 @@ import { CourseListItem } from "../../../types";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 
+import { apiConfig } from "../../../lib/api";
+
 async function getCourse(slug: string): Promise<CourseListItem | "not_found" | null> {
   try {
-    const res = await fetch(`http://localhost:8000/courses/${slug}`, {
+    const res = await fetch(`${apiConfig.endpoints.courses}/${slug}`, {
       cache: 'no-store'
     });
     if (res.status === 404) return "not_found";
