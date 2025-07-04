@@ -5,7 +5,6 @@ import styles from "../../page.module.scss";
 import { CourseListItem } from "../../../types";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
-
 import { apiConfig } from "../../../lib/api";
 
 async function getCourse(slug: string): Promise<CourseListItem | "not_found" | null> {
@@ -22,7 +21,7 @@ async function getCourse(slug: string): Promise<CourseListItem | "not_found" | n
   }
 }
 
-export default function CourseDetail({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: { slug: string } }) {
   const [course, setCourse] = useState<CourseListItem | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
