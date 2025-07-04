@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "8638b851-4b2c-474b-923a-f185132aa982",
+		"name": "Cursor-AI-Pruebas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36478289"
+	},
+	"item": [
+		{
+			"name": "obetner cursos",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Crear_cursos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"name\": \"Curso de Python\",\r\n    \"description\": \"Curso de Python avanzado\",\r\n    \"thumbnail\": \"https://via.placeholder.com/150\",\r\n    \"slug\": \"curso-de-python\",\r\n    \"teacher_id\": [1]\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/courses"
+			},
+			"response": []
+		},
+		{
+			"name": "obtener_teacher_id",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "crear clase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"course_id\": 1,\r\n    \"name\": \"Clase 2\",\r\n    \"description\": \"Clase avanzada\",\r\n    \"slug\": \"clase-2\",\r\n    \"video_url\": \"https://www.youtube.com/watch?v=xxxx\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/classes"
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar clase",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8000/classes/1"
+			},
+			"response": []
+		}
+	]
+}

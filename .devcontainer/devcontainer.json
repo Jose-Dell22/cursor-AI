@@ -1,0 +1,11 @@
+{
+  "name": "Platziflix Dev",
+  "dockerComposeFile": "../Backend/docker-compose.yml",
+  "service": "api",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+  "extensions": [
+    "ms-python.python",
+    "ms-azuretools.vscode-docker"
+  ]
+} 
