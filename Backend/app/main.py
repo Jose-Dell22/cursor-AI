@@ -90,10 +90,10 @@ insert_initial_data()
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION)
 
-# Habilitar CORS para permitir peticiones desde el frontend
+# Habilitar CORS para permitir peticiones solo desde el frontend de producción
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # O puedes poner ["http://localhost:3000"] para mayor seguridad
+    allow_origins=["https://fronteddementorsmart.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
