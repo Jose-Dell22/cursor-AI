@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import Settings
 from app.routers.courses import router as courses_router
 from app.routers.teachers import router as teachers_router
@@ -36,43 +37,43 @@ def insert_initial_data():
         courses = [
             Course(
                 name="Fundamentos en matemáticas",
-                description="Asesoría y trabajos en fundamentos de matemáticas.",
-                thumbnail="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=400&q=80",  # Matemáticas básicas
+                description="Curso base de matemáticas para nivelar conocimientos.",
+                thumbnail="/Fundamentos_matemáticas.webp",
                 slug="fundamentos-matematicas",
                 teacher_id=1
             ),
             Course(
                 name="Cálculo diferencial",
-                description="Asesoría y trabajos en cálculo diferencial.",
-                thumbnail="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=400&q=80",  # Cálculo diferencial
+                description="Aprende los conceptos básicos de cálculo diferencial.",
+                thumbnail="/calculo_difrencial.webp",
                 slug="calculo-diferencial",
                 teacher_id=1
             ),
             Course(
                 name="Cálculo Integral",
-                description="Asesoría y trabajos en cálculo integral.",
-                thumbnail="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",  # Cálculo integral
+                description="Domina la integral y sus aplicaciones.",
+                thumbnail="/calculo_integral.webp",
                 slug="calculo-integral",
                 teacher_id=1
             ),
             Course(
                 name="Front end programación web",
-                description="Asesoría y trabajos en programación web.",
-                thumbnail="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=400&q=80",  # Desarrollo web frontend
+                description="Introducción al desarrollo web moderno.",
+                thumbnail="/frontend_y_fundamentos_programación.webp",
                 slug="frontend-programacion-web",
                 teacher_id=1
             ),
             Course(
                 name="Fundamentos de programación",
-                description="Asesoría y trabajos en fundamentos de programación.",
-                thumbnail="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80",  # Código de programación
+                description="Lógica y bases de la programación.",
+                thumbnail="/frontend_y_fundamentos_programación.webp",
                 slug="fundamentos-programacion",
                 teacher_id=1
             ),
             Course(
                 name="Trabajos de otras materias",
-                description="Asesoría y trabajos en otras materias universitarias.",
-                thumbnail="https://images.unsplash.com/photo-1523050854058-8df90110c9a1?auto=format&fit=crop&w=400&q=80",  # Universidad y educación
+                description="Apoyo en tareas y proyectos universitarios.",
+                thumbnail="/trabajos_otras_materias.webp",
                 slug="trabajos-otras-materias",
                 teacher_id=1
             ),
@@ -88,6 +89,15 @@ def insert_initial_data():
 insert_initial_data()
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION)
+
+# Habilitar CORS para permitir peticiones desde el frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # O puedes poner ["http://localhost:3000"] para mayor seguridad
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(courses_router)
 app.include_router(teachers_router)
