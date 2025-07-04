@@ -329,4 +329,349 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+// ===== RESPONSIVE DESIGN =====
+
+// Tablets (768px - 1023px)
+@media (max-width: 1023px) {
+  .page {
+    padding: 1.5rem 0;
+  }
+
+  .main {
+    max-width: 90%;
+    padding: 0 1rem;
+  }
+
+  .coursesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .heroBg {
+    padding-top: 30px;
+  }
+
+  .topButtons {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .primaryBtn, .secondaryBtn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+
+  .centerGlow {
+    margin-bottom: 32px;
+    padding: 12px;
+  }
+
+  .demoImage {
+    width: 480px;
+    max-width: 85vw;
+  }
+
+  .stepsSection h2 {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+
+  .stepsGrid {
+    gap: 32px;
+  }
+
+  .step {
+    max-width: 200px;
+  }
+
+  .notification {
+    top: 15px;
+    right: 15px;
+    padding: 12px 16px;
+    max-width: 350px;
+  }
+}
+
+// Mobile (480px - 767px)
+@media (max-width: 767px) {
+  .page {
+    padding: 1rem 0;
+  }
+
+  .main {
+    max-width: 95%;
+    padding: 0 0.5rem;
+  }
+
+  .coursesGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .cardImage {
+    max-width: 160px;
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+
+  .cardDesc {
+    font-size: 0.9rem;
+  }
+
+  .heroBg {
+    padding-top: 20px;
+  }
+
+  .topButtons {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .primaryBtn, .secondaryBtn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .centerGlow {
+    margin-bottom: 24px;
+    padding: 8px;
+    box-shadow: 0 0 40px 8px #3cff7a55, 0 0 0 4px #101c10;
+  }
+
+  .demoImage {
+    width: 100%;
+    max-width: 90vw;
+    border-radius: 12px;
+  }
+
+  .stepsSection {
+    margin-top: 16px;
+  }
+
+  .stepsSection h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .stepsGrid {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .step {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+  }
+
+  .step h3 {
+    font-size: 1.1rem;
+  }
+
+  .step p {
+    font-size: 0.9rem;
+  }
+
+  .loadingSpinner {
+    gap: 12px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .errorMessage {
+    gap: 12px;
+  }
+
+  .errorIcon {
+    font-size: 2.5rem;
+  }
+
+  .errorMessage h2 {
+    font-size: 1.3rem;
+  }
+
+  .errorMessage p {
+    font-size: 0.9rem;
+  }
+
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    padding: 12px;
+    max-width: none;
+    border-radius: 8px;
+  }
+
+  .notificationMessage {
+    font-size: 0.9rem;
+  }
+}
+
+// Small Mobile (320px - 479px)
+@media (max-width: 479px) {
+  .page {
+    padding: 0.5rem 0;
+  }
+
+  .main {
+    max-width: 100%;
+    padding: 0 0.25rem;
+  }
+
+  .coursesGrid {
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .card {
+    padding: 0.75rem;
+  }
+
+  .cardImage {
+    max-width: 140px;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+  }
+
+  .cardDesc {
+    font-size: 0.85rem;
+  }
+
+  .heroBg {
+    padding-top: 15px;
+  }
+
+  .topButtons {
+    max-width: 260px;
+  }
+
+  .primaryBtn, .secondaryBtn {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .centerGlow {
+    margin-bottom: 20px;
+    padding: 6px;
+    box-shadow: 0 0 30px 6px #3cff7a55, 0 0 0 3px #101c10;
+  }
+
+  .demoImage {
+    border-radius: 8px;
+  }
+
+  .stepsSection h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .stepsGrid {
+    gap: 20px;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+  }
+
+  .step p {
+    font-size: 0.85rem;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+  }
+
+  .errorIcon {
+    font-size: 2rem;
+  }
+
+  .errorMessage h2 {
+    font-size: 1.2rem;
+  }
+
+  .errorMessage p {
+    font-size: 0.85rem;
+  }
+
+  .notification {
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    padding: 10px;
+  }
+
+  .notificationMessage {
+    font-size: 0.85rem;
+  }
+
+  .notificationIcon {
+    font-size: 1rem;
+  }
+}
+
+// Landscape orientation for mobile
+@media (max-width: 767px) and (orientation: landscape) {
+  .heroBg {
+    padding-top: 15px;
+  }
+
+  .topButtons {
+    flex-direction: row;
+    max-width: none;
+  }
+
+  .primaryBtn, .secondaryBtn {
+    width: auto;
+  }
+
+  .stepsGrid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .step {
+    max-width: 200px;
+    width: auto;
+  }
+}
+
+// High DPI displays
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .cardImage {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 } 
