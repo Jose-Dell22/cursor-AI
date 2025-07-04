@@ -21,19 +21,20 @@ async function getCourse(slug: string): Promise<CourseListItem | "not_found" | n
   }
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
   const [course, setCourse] = useState<CourseListItem | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [slug, setSlug] = useState<string>('');
   const router = useRouter();
 
-  const fetchCourse = async () => {
+  const fetchCourse = async (courseSlug: string) => {
     try {
       setLoading(true);
       setError(null);
       setNotFound(false);
-      const courseData = await getCourse(params.slug);
+      const courseData = await getCourse(courseSlug);
       if (courseData === "not_found") {
         setNotFound(true);
         setCourse(null);
@@ -52,8 +53,14 @@ export default function Page({ params }: { params: { slug: string } }) {
   };
 
   useEffect(() => {
-    fetchCourse();
-  }, [params.slug]);
+    const loadParams = async () => {
+      const resolvedParams = await params;
+      setSlug(resolvedParams.slug);
+      await fetchCourse(resolvedParams.slug);
+    };
+    
+    loadParams();
+  }, [params]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -81,7 +88,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     return (
       <ErrorMessage 
         message={error || "Curso no encontrado"} 
-        onRetry={fetchCourse}
+        onRetry={() => fetchCourse(slug)}
       />
     );
   }
