@@ -8,7 +8,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import CourseCard from "./components/CourseCard";
 import CourseSkeleton from "./components/CourseSkeleton";
 
-import { apiConfig } from "../../lib/api";
+import { apiConfig } from "../lib/api";
 
 async function getCourses(): Promise<CourseListItem[]> {
   const res = await fetch(apiConfig.endpoints.courses, { cache: "no-store" });
