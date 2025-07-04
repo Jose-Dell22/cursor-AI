@@ -1,4 +1,12 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://cursor-ai-xi.vercel.app/';
+// Lista de posibles backends para producción y previews
+const BACKEND_DOMAINS = [
+  'https://cursor-ai-xi.vercel.app',
+  'https://cursor-ai-git-main-jose-dell-22s-projects.vercel.app',
+  'https://cursor-ai-jose-dell-22s-projects.vercel.app'
+];
+
+// Selecciona el backend según la variable de entorno o usa el primero como fallback
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || BACKEND_DOMAINS[0];
 
 export const apiConfig = {
   baseUrl: API_BASE_URL,
