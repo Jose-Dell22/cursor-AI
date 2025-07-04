@@ -93,7 +93,11 @@ app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION)
 # Habilitar CORS para permitir peticiones solo desde el frontend de producción
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://fronteddementorsmart.vercel.app"],
+    allow_origins=[
+        "https://fronteddementorsmart.vercel.app",
+        "https://fronteddementorsmart-jose-dell-22s-projects.vercel.app",
+        "https://fronteddementorsmart-git-main-jose-dell-22s-projects.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
