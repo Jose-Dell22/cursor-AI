@@ -9,8 +9,8 @@ def get_initial_teachers():
     return [
         Teacher.model_validate({
             "id": 1,
-            "name": "John Doe",
-            "email": "john.doe@example.com",
+            "name": "Jose Fernando Dell",
+            "email": "jfdell41@gmail.com",
             "created_at": "2021-01-01",
             "updated_at": "2021-01-01",
             "deleted_at": None

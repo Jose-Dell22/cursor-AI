@@ -1,41 +1,12 @@
-from fastapi import APIRouter, HTTPException
-from typing import List
-from app.models import Course, Class
+from fastapi import APIRouter, Depends, HTTPException
+from typing import List, Optional
+from sqlalchemy.orm import Session
+from app.models import Course
+from app.db import get_db
 from pydantic import BaseModel
+from datetime import datetime
 
 router = APIRouter(prefix="/courses", tags=["courses"])
-
-# Datos simulados
-def get_initial_courses():
-    return [
-        Course.model_validate({
-            "id": 1,
-            "name": "Curso de React",
-            "description": "Curso de React",
-            "thumbnail": "https://via.placeholder.com/150",
-            "slug": "curso-de-react",
-            "created_at": "2021-01-01",
-            "updated_at": "2021-01-01",
-            "deleted_at": None,
-            "teacher_id": [1, 2, 3]
-        })
-    ]
-
-courses_db = get_initial_courses()
-
-classes_db = [
-    Class.model_validate({
-        "id": 1,
-        "course_id": 1,
-        "name": "Clase 1",
-        "description": "Clase 1",
-        "slug": "clase-1",
-        "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "created_at": "2021-01-01",
-        "updated_at": "2021-01-01",
-        "deleted_at": None
-    })
-]
 
 class CourseCreate(BaseModel):
     name: str
@@ -51,56 +22,96 @@ class CourseUpdate(BaseModel):
     slug: str | None = None
     teacher_id: List[int] | None = None
 
-@router.get("/", response_model=List[Course])
-def list_courses() -> List[Course]:
-    return courses_db
+class CourseOut(BaseModel):
+    id: int
+    name: str
+    description: Optional[str]
+    thumbnail: Optional[str]
+    slug: str
+    created_at: Optional[str]
+    updated_at: Optional[str]
+    deleted_at: Optional[str]
+    teacher_id: int
 
-@router.get("/{slug}", response_model=Course)
-def get_course(slug: str) -> Course:
-    for course in courses_db:
+# Cursos de ejemplo en memoria
+example_courses = [
+    CourseOut(
+        id=1,
+        name="Fundamentos en matemáticas",
+        description="Curso base de matemáticas para nivelar conocimientos.",
+        thumbnail="/Fundamentos_matemáticas.webp",
+        slug="fundamentos-matematicas",
+        created_at=datetime.utcnow().isoformat(),
+        updated_at=datetime.utcnow().isoformat(),
+        deleted_at=None,
+        teacher_id=1
+    ),
+    CourseOut(
+        id=2,
+        name="Cálculo diferencial",
+        description="Aprende los conceptos básicos de cálculo diferencial.",
+        thumbnail="/calculo_difrencial.webp",
+        slug="calculo-diferencial",
+        created_at=datetime.utcnow().isoformat(),
+        updated_at=datetime.utcnow().isoformat(),
+        deleted_at=None,
+        teacher_id=1
+    ),
+    CourseOut(
+        id=3,
+        name="Cálculo Integral",
+        description="Domina la integral y sus aplicaciones.",
+        thumbnail="/calculo_integral.webp",
+        slug="calculo-integral",
+        created_at=datetime.utcnow().isoformat(),
+        updated_at=datetime.utcnow().isoformat(),
+        deleted_at=None,
+        teacher_id=1
+    ),
+    CourseOut(
+        id=4,
+        name="Front end programación web",
+        description="Introducción al desarrollo web moderno.",
+        thumbnail="/frontend_y_fundamentos_programación.webp",
+        slug="frontend-programacion-web",
+        created_at=datetime.utcnow().isoformat(),
+        updated_at=datetime.utcnow().isoformat(),
+        deleted_at=None,
+        teacher_id=1
+    ),
+    CourseOut(
+        id=5,
+        name="Fundamentos de programación",
+        description="Lógica y bases de la programación.",
+        thumbnail="/frontend_y_fundamentos_programación.webp",
+        slug="fundamentos-programacion",
+        created_at=datetime.utcnow().isoformat(),
+        updated_at=datetime.utcnow().isoformat(),
+        deleted_at=None,
+        teacher_id=1
+    ),
+    CourseOut(
+        id=6,
+        name="Trabajos de otras materias",
+        description="Apoyo en tareas y proyectos universitarios.",
+        thumbnail="/trabajos_otras_materias.webp",
+        slug="trabajos-otras-materias",
+        created_at=datetime.utcnow().isoformat(),
+        updated_at=datetime.utcnow().isoformat(),
+        deleted_at=None,
+        teacher_id=1
+    ),
+]
+
+@router.get("/", response_model=List[CourseOut])
+def list_courses() -> List[CourseOut]:
+    return example_courses
+
+@router.get("/{slug}", response_model=CourseOut)
+def get_course_by_slug(slug: str):
+    for course in example_courses:
         if course.slug == slug:
             return course
     raise HTTPException(status_code=404, detail="Course not found")
 
-@router.post("/", response_model=Course, status_code=201)
-def create_course(course: CourseCreate) -> Course:
-    new_id = max((c.id for c in courses_db), default=0) + 1
-    new_course = Course.model_validate({
-        **course.model_dump(),
-        "id": new_id,
-        "created_at": "2021-01-01",
-        "updated_at": "2021-01-01",
-        "deleted_at": None
-    })
-    courses_db.append(new_course)
-    return new_course
-
-@router.put("/{slug}", response_model=Course)
-def update_course(slug: str, course_update: CourseUpdate) -> Course:
-    for idx, course in enumerate(courses_db):
-        if course.slug == slug:
-            updated_data = course.model_dump()
-            update_fields = course_update.model_dump(exclude_unset=True)
-            updated_data.update(update_fields)
-            updated_data["updated_at"] = "2021-01-01"
-            updated_course = Course.model_validate(updated_data)
-            courses_db[idx] = updated_course
-            return updated_course
-    raise HTTPException(status_code=404, detail="Course not found")
-
-@router.delete("/{slug}", response_model=dict)
-def delete_course(slug: str) -> dict:
-    for idx, course in enumerate(courses_db):
-        if course.slug == slug:
-            del courses_db[idx]
-            return {"message": "Course deleted"}
-    raise HTTPException(status_code=404, detail="Course not found")
-
-@router.get("/{slug}/classes/{class_id}", response_model=Class)
-def get_class(slug: str, class_id: int) -> Class:
-    for course in courses_db:
-        if course.slug == slug:
-            for c in classes_db:
-                if c.id == class_id and c.course_id == course.id:
-                    return c
-    raise HTTPException(status_code=404, detail="Class not found") 
+# El resto de las rutas (GET by slug, POST, PUT, DELETE, etc.) deben migrarse para usar la base de datos real y SQLAlchemy síncrono. 

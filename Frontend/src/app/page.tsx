@@ -1,3 +1,4 @@
+'use client';
 import Link from "next/link";
 import styles from "./page.module.scss";
 import { CourseListItem } from "../types";
@@ -11,25 +12,46 @@ async function getCourses(): Promise<CourseListItem[]> {
 export default async function Home() {
   const courses = await getCourses();
   return (
-    <div className={styles.page}>
-      <h1>Platzi Flix</h1>
-      <main className={styles.main}>
-        <div className={styles.coursesGrid}>
+    <div className={styles.heroBg}>
+      <div className={styles.topButtons}>
+        <a
+          href="https://wa.me/573213460838"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.primaryBtn}
+        >
+          WhatsApp
+        </a>
+        <a
+          href="https://www.instagram.com/josefernandodell?igsh=MWczMnQ1dDA3cnYybA=="
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.secondaryBtn}
+        >
+          Instagram
+        </a>
+      </div>
+      <div className={styles.centerGlow}>
+        <img src="/mentor.jpeg" alt="Mentor Smart" className={styles.demoImage} />
+      </div>
+      <div className={styles.stepsSection}>
+        <h2>Cursos y Servicios Disponibles</h2>
+        <div className={styles.stepsGrid}>
           {courses.map((course) => (
-            <Link href={`/courses/${course.slug}`} className={styles.card} key={course.id}>
+            <Link href={`/courses/${course.slug}`} className={styles.step} key={course.id}>
               <img
-                className={styles.cardImage}
+                className={styles.icon}
                 src={course.thumbnail}
                 alt={course.name}
-                width={180}
-                height={120}
+                width={64}
+                height={64}
               />
-              <div className={styles.cardTitle}>{course.name}</div>
-              <div className={styles.cardDesc}>{course.description}</div>
+              <h3>{course.name}</h3>
+              <p>{course.description}</p>
             </Link>
           ))}
         </div>
-      </main>
+      </div>
     </div>
   );
 }
